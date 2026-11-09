@@ -42,13 +42,27 @@ public class DAOOfertasMySQL implements DAOOfertas{
 
     @Override
     public void update(Oferta oferta, String titulo) {
-
-        
-
+        String query = "update oferta set titulo = ?, descripcion = ? where titulo = ? ";
+        try {
+            PreparedStatement statement = DBConnection.getInstance().prepareStatement(query);
+            statement.setString(1, oferta.getTitulo());
+            statement.setString(2, oferta.getDescripcion());
+            statement.setString(3, titulo);
+            statement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void delete(String titulo) {
-
+        String query = "delete from oferta where titulo = ?";
+        try {
+            PreparedStatement statement = DBConnection.getInstance().prepareStatement(query);
+            statement.setString(1, titulo);
+            statement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
