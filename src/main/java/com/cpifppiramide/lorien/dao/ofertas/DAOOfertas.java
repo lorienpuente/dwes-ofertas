@@ -10,4 +10,6 @@ public interface DAOOfertas {
     void save(Oferta oferta);
     void update(Oferta oferta, String titulo);
     void delete(String titulo);
+
+    // Comentario
 }
