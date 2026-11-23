@@ -15,6 +15,11 @@ public class OfertasRestController {
         return DAOFactory.getInstance().getDaoOfertas().getAll();
     }
 
+    @GetMapping("/api/ofertas/{titulo}")
+    Oferta getByTitulo(@PathVariable String titulo){
+        return DAOFactory.getInstance().getDaoOfertas().getByTitulo(titulo);
+    }
+    
     @PostMapping("/api/ofertas")
     Oferta save(@RequestBody Oferta oferta){
         DAOFactory.getInstance().getDaoOfertas().save(oferta);
