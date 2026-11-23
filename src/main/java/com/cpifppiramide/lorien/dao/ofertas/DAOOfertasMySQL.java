@@ -26,7 +26,23 @@ public class DAOOfertasMySQL implements DAOOfertas{
         }
         return ofertas;
     }
-
+    
+    @Override
+    public Oferta getByTitulo(String titulo) {
+        String query = "select * from oferta where titulo = ?";
+        try {
+            PreparedStatement statement = DBConnection.getInstance().prepareStatement(query);
+            statement.setString(1, titulo);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()){
+                return new Oferta(rs.getString("titulo"), rs.getString("descripcion"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+    
     @Override
     public void save(Oferta oferta) {
         String query = "insert into oferta values (?,?)";
